@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f0e17;
+  --foreground: #fffffe;
+  --primary: #ff8906;
+  --secondary: #f25f4c;
+  --tertiary: #e53170;
+  --accent: #7f5af0;
+  --muted: #2e2f3e;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+
+  .gradient-bg {
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+  }
+
+  .glassmorphism {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .glow {
+    @apply relative;
+  }
+  
+  .glow::before {
+    content: '';
+    @apply absolute -inset-0.5 rounded-lg blur-md opacity-75;
+    background: linear-gradient(45deg, var(--primary), var(--accent), var(--tertiary));
+    z-index: -1;
+  }
+
+  /* Parallax effect classes */
+  .parallax-container {
+    @apply overflow-hidden relative;
+    perspective: 1000px;
+  }
+  
+  .parallax-layer {
+    @apply absolute w-full h-full transition-transform duration-300;
+    transform-style: preserve-3d;
+  }
+
+  /* 3D effect utilities */
+  .rotate-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-out;
+  }
+
+  .rotate-3d:hover {
+    transform: rotateY(15deg) rotateX(5deg);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 font-medium rounded-lg transition-all duration-300 bg-primary text-foreground hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 font-medium rounded-lg transition-all duration-300 border border-accent text-accent hover:bg-accent/10;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+  
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
