@@ -1,5 +1,6 @@
 import Hero from '@/components/layout/Hero';
 import ProjectsSection from '@/components/layout/ProjectsSection';
+import TestimonialsSection from '@/components/layout/TestimonialsSection';
 import { Suspense } from 'react';
 
 export default function Home() {
@@ -99,6 +100,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+        
+        {/* Testimonials Section */}
+        <TestimonialsSection />
         
         {/* Contact CTA Section */}
         <section id="contact" className="section py-32 relative overflow-hidden">

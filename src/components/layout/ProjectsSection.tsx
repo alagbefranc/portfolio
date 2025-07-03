@@ -5,89 +5,8 @@ import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-// Project data representing 10 selected projects
-const projects = [
-  {
-    id: 'flashpoint-qr',
-    title: 'FlashPoint QR',
-    description: 'A QR-based ordering system for restaurants with kitchen display and inventory management',
-    tags: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
-    image: '/projects/flashpoint-qr.jpg',
-    color: '#ff8906'
-  },
-  {
-    id: 'purpsend',
-    title: 'PurpSend',
-    description: 'A financial transaction platform for sending money securely across borders',
-    tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-    image: '/projects/purpsend.jpg',
-    color: '#7f5af0'
-  },
-  {
-    id: 'clinical-assistant',
-    title: 'Clinical Assistant',
-    description: 'AI-powered clinical documentation and decision support system for healthcare professionals',
-    tags: ['Next.js', 'OpenAI', 'TypeScript', 'Firebase'],
-    image: '/projects/clinical-assistant.jpg',
-    color: '#e53170'
-  },
-  {
-    id: 'gasaroo-delivery',
-    title: 'Gasaroo Delivery',
-    description: 'On-demand fuel delivery service application with real-time tracking',
-    tags: ['React Native', 'Firebase', 'Google Maps API', 'Node.js'],
-    image: '/projects/gasaroo-delivery.jpg',
-    color: '#f25f4c'
-  },
-  {
-    id: 'rag-chatbot',
-    title: 'RAG Chatbot Platform',
-    description: 'Retrieval-augmented generation platform for building knowledge-based chatbots',
-    tags: ['Python', 'FastAPI', 'Vector DB', 'React'],
-    image: '/projects/rag-chatbot.jpg',
-    color: '#2cb67d'
-  },
-  {
-    id: 'ehright',
-    title: 'EHRight',
-    description: 'Electronic health records management system with patient portal',
-    tags: ['Angular', 'Express', 'PostgreSQL', 'TypeScript'],
-    image: '/projects/ehright.jpg',
-    color: '#ff8906'
-  },
-  {
-    id: 'job-application-agent',
-    title: 'Job Application Agent',
-    description: 'AI-powered assistant for automating job applications and tracking progress',
-    tags: ['React', 'Python', 'NLP', 'MongoDB'],
-    image: '/projects/job-application-agent.jpg',
-    color: '#7f5af0'
-  },
-  {
-    id: 'splitwise',
-    title: 'SplitWise',
-    description: 'Expense splitting application for groups, trips, and roommates',
-    tags: ['React Native', 'Firebase', 'Redux', 'Expo'],
-    image: '/projects/splitwise.jpg',
-    color: '#e53170'
-  },
-  {
-    id: 'culinary-compass',
-    title: 'Culinary Compass',
-    description: 'Recipe discovery and meal planning application with ingredient tracking',
-    tags: ['Vue.js', 'Nuxt', 'Supabase', 'JavaScript'],
-    image: '/projects/culinary-compass.jpg',
-    color: '#f25f4c'
-  },
-  {
-    id: 'ai-forex-trading',
-    title: 'AI Forex Trading',
-    description: 'Machine learning-based trading signals and analysis for forex markets',
-    tags: ['Python', 'TensorFlow', 'FastAPI', 'React'],
-    image: '/projects/ai-forex-trading.jpg',
-    color: '#2cb67d'
-  }
-];
+// Import projects data from data file
+import { projects } from '@/data/projects';
 
 interface Project {
   id: string;
@@ -114,7 +33,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="card-hover rotate-3d glassmorphism rounded-xl overflow-hidden"
+      className="card-hover rotate-3d glassmorphism rounded-xl overflow-hidden cursor-pointer"
       onClick={() => router.push(`/projects/${project.id}`)}
     >
       <div 
@@ -159,7 +78,7 @@ export default function ProjectsSection() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="section relative bg-background py-20" ref={sectionRef}>
+    <section id="projects" className="py-20" ref={sectionRef}>
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -167,28 +86,19 @@ export default function ProjectsSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Featured <span className="gradient-text">Projects</span>
+          </h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            A collection of my most significant projects developed with Cascade, showcasing various technologies and solutions.
+            A selection of my recent work built with modern technologies and best practices.
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center mt-12"
-        >
-          <Link href="/projects" className="btn-outline">
-            View All Projects
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
